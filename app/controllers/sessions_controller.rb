@@ -4,11 +4,12 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email; params[:session][:email].downcase)
+    user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       #ユーザーログイン後にユーザー情報のページにリダイする
     else
-      #エラーメッセ時を作成する
+      #エラーメッセjiを作成する
+      flash.now[:danger] = 'Invalid email/password combination' #本当は正しくない
       render 'new'
     end
   end
