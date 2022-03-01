@@ -25,8 +25,13 @@ class UsersController < ApplicationController
                                   :password_confirmation)
     end
 
-    def destroy
-      log_out
-      redirect_to root_url
+    def edit
+      @user = User.find(params[:id])
     end
+
+    private
+      def user_params
+        params.require(:user).permit(:name, :email, :password,
+                                    :password_confirmation)
+      end
 end
