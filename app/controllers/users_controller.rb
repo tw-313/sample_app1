@@ -23,6 +23,15 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def update
+    @user = User.find(params[:id])
+    #更新成功した時した場合に扱う
+    if @user.update(user_params)
+    else
+      render 'edit'
+    end
+  end
+
   private
 
     def user_params
