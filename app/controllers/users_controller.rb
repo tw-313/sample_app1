@@ -25,8 +25,9 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    #更新成功した時した場合に扱う
     if @user.update(user_params)
+      flash[:success] = "Profile update"
+      redirect_to @user
     else
       render 'edit'
     end
